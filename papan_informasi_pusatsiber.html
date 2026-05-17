@@ -31,6 +31,7 @@
     height: 1080px;
     overflow: hidden;
     position: relative;
+    transform-origin: top left;
   }
 
   /* Animated grid background */
@@ -611,6 +612,17 @@ updateClock();
 setInterval(updateClock, 1000);
 fetchData();
 setInterval(fetchData, 60000); // refresh setiap 1 menit
+
+// Auto scale to fit any screen size
+function autoScale() {
+  const scaleX = window.innerWidth / 1920;
+  const scaleY = window.innerHeight / 1080;
+  const scale = Math.min(scaleX, scaleY);
+  document.body.style.transform = `scale(${scale})`;
+  document.body.style.marginLeft = `${(window.innerWidth - 1920 * scale) / 2}px`;
+}
+autoScale();
+window.addEventListener('resize', autoScale);
 </script>
 </body>
 </html>
